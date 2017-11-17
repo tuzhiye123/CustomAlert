@@ -12,7 +12,7 @@
 ## Usage（使用）
 
 1）用空的div来承载，其中`id`为`test_alert1`，可以随便命名，里面`class name`为`custom_alert_mask_layer`,`custom_alert_div`,
-`custome_alert_content`的div需要一起复制下来即可，注意`class name`为`custome_alert_content`下一层div必须要有。
+`custome_alert_content`的div需要一起复制下来，注意`class name`为`custome_alert_content`下一层div必须要有。
 ```
 <div id="test_alert1">
             <div class="custom_alert_mask_layer"></div>

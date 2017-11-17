@@ -1,8 +1,8 @@
 |Title       |Description     |
 |:----------:|:-------------:|
-|customAlert|从底部向上的弹窗|
+|CustomAlert|从底部向上的弹窗|
 
-## createAlert
+## CustomAlert
 
 一个自定义 js 小工具。从底部向上弹出的弹窗，可以自适应高度，超过max-height就会出现滚动条。
 **弹窗有滚动条，背景window也可以滚动，滚动弹窗，背景window不会随之滚动。**

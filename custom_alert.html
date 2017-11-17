@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- Turn off Safari automatic telephone number detection -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- 适应移动设备屏幕尺寸. 并设置不要让页面缩放, 显示1:1的比例 -->
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
+    <meta http-equiv="Content-Security-Policy">
+
+    <!-- 引用 jquery.mobile-1.4.5 -->
+    <link rel="stylesheet" href="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="libs/jquery.mobile-1.4.5/jquery.min.js"></script>
+    <script src="libs/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="cordova.js"></script>
+
+    <script src="js/custom_alert.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/custom_alert.css">
+
+    <style>
+        .test_div{
+            padding: 15px;text-align: center;font-size: 15px;color: red;
+        }
+        .test_title{
+            text-align: center;padding: 10px;color: gray;font-size: 20px;
+        }
+        .ui-content{
+            padding: 0;
+        }
+        .ui-content .ui-listview{
+            margin: 0;
+        }
+        .ui-listview>.ui-li-static{
+            padding: 30px;
+        }
+
+        .member_select_ul.ui-listview>.ui-li-static{
+            padding: 15px;text-align: center;font-size: 15px;text-shadow: none;
+        }
+        .member_select_ul{
+            border-radius: 15px;
+        }
+        .member_select_ul.ui-listview>.ui-li-static.member_alert_tips{
+            font-size: 13px;color: gray;
+        }
+        .member_profile_line_div{
+            height: 10px;
+        }
+        .member_profile_cancel{
+            margin-top: 10px;padding: 15px;border-radius: 15px;text-align: center;font-size: 15px;background-color: grey;color: white;text-shadow: none;font-weight: normal;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div data-role="page" id="custom_alert_page">
+
+    <!-- /header -->
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" data-transition="none">
+        <h4>CustomAlert</h4>
+    </div>
+    <!-- /header -->
+
+    <!-- /content -->
+    <div data-role="content">
+        <div class="test_div">请点击线面的item进行测试</div>
+        <ul data-role="listview" id="content_ul">
+            <li id="test1">弹窗内容超出弹窗最大高度</li>
+            <li id="test2">弹窗内容小于弹窗最大高度</li>
+            <li id="test3">改变弹窗的样式</li>
+            <li>test4</li>
+            <li>test5</li>
+            <li>test6</li>
+            <li>test7</li>
+            <li>test8</li>
+            <li>test9</li>
+        </ul>
+    </div>
+
+    <!--footer-->
+    <div style="border: none;padding: 0;" data-role="footer" data-position="fixed" data-tap-toggle="false" data-transition="none">
+
+        <!-- 显示内容超出弹窗的最大高度的-->
+        <div id="test_alert1">
+            <div class="custom_alert_mask_layer"></div>
+            <div class="custom_alert_div">
+                <div class="custome_alert_content">
+                    <div>
+
+                        <!-- 需要注意这里面才是你要进行绘制的内容，class name为custome_alert_content下一层div必须要有-->
+                        <div class="test_title">test title</div>
+                        <ul data-role="listview" id="test_alert1_ul">
+                            <li>test1</li>
+                            <li>test2</li>
+                            <li>test3</li>
+                            <li>test4</li>
+                            <li>test5</li>
+                            <li>test6</li>
+                            <li>test7</li>
+                            <li>test8</li>
+                            <li>test9</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 显示内容小于弹窗的最大高度的-->
+        <div id="test_alert2">
+            <div class="custom_alert_mask_layer"></div>
+            <div class="custom_alert_div">
+                <div class="custome_alert_content">
+                    <div>
+
+                        <div class="test_title">test title</div>
+                        <ul data-role="listview">
+                            <li>test1</li>
+                            <li>test2</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 改变弹窗的样式-->
+        <div id="test_alert3">
+            <div class="custom_alert_mask_layer"></div>
+            <div class="custom_alert_div">
+                <div class="custome_alert_content">
+                    <div style="margin: 0 10px;">
+
+                        <ul class="member_select_ul" data-role="listview">
+                            <li data-icon="false" class="member_alert_tips">设置头像</li>
+                            <li data-icon="false">从相册中选取</li>
+                            <li data-icon="false">拍照</li>
+                        </ul>
+                        <div class="member_profile_cancel" id="cancel">取消</div>
+                        <div class="member_profile_line_div"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script>
+
+    //fixed padding-bottonm of fooetr for class name .ui-page-footer-fixed
+    $(document).on("pageshow", "#custom_alert_page", function () {
+        var currentPage = $.mobile.pageContainer.pagecontainer("getActivePage");
+        currentPage.css("padding-bottom","0");
+    });
+
+    $("#test1").off("click").on("click",function(){
+        //弹出弹窗
+        $("#test_alert1").createAlert('open');
+    });
+    $("#test_alert1_ul li").off("click").on("click",function(){
+        $("#test_alert1").createAlert('close');
+    });
+
+    $("#test2").off("click").on("click",function(){
+        $("#test_alert2").createAlert('open');
+    });
+
+    $("#test3").off("click").on("click",function(){
+        //弹出弹窗
+        $("#test_alert3").createAlert('open');
+        //改变颜色
+        $("#test_alert3").createAlert('changeColor','transparent');
+    });
+
+    $("#cancel").off("click").on("click",function(){
+        //close弹窗
+        $("#test_alert3").createAlert('close');
+    });
+
+</script>
+
+</body>
+</html>

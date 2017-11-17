@@ -1,0 +1,12 @@
+
+.custom_alert_mask_layer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;background-color: grey;opacity: 0.3;display: none;
+}
+.custom_alert_div{
+    width: 100%;position: absolute;bottom: 0;background-color: white;display: none;
+}
+.custome_alert_content{
+    overflow: auto;font-weight: normal;
+}
